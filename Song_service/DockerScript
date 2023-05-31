@@ -1,0 +1,4 @@
+Docker image: song_service:latest
+docker build -t song_service:latest .
+docker run -p 8082:8082 song_service:latest
+docker stop song_service:latest

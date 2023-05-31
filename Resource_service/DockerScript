@@ -1,0 +1,7 @@
+Docker image: resource_service:latest
+
+docker build -t resource_service:latest .
+
+docker run -p 8081:8081 resource_service:latest
+
+docker stop resource_service:latest

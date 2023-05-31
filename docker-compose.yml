@@ -1,0 +1,43 @@
+version: '2'
+
+services:
+  app1:
+    image: 'song_service:latest'
+    container_name: app1
+    build:
+      context: /Song_service
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+  app2:
+    image: 'resource_service:latest'
+    container_name: app2
+    build:
+      context: /Resource_service
+    ports:
+      - "8081:8081"
+    depends_on:
+      - db
+      - rabbit
+  app3:
+    image: 'resource_processor:latest'
+    container_name: app3
+    build:
+      context: /resource_processor
+    ports:
+      - "8082:8082"
+    depends_on:
+      - db
+      - rabbit
+  db:
+    image: 'postgres:13.1-alpine'
+    container_name: db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=QWer1234
+
+  rabbit:
+    image: 'rabbitmq:latest'
+    container_name: rabbit
+
